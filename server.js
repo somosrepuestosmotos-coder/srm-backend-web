@@ -20,10 +20,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 10000;
 const ADMIN_KEY = process.env.ADMIN_KEY || "SRM2025ADMIN";
+const RENDER_URL = process.env.RENDER_URL || `https://srm-backend-web.onrender.com`;
 
 app.use(cors());
 app.use(express.json());
-app.use("/videos", express.static(path.join(__dirname, "videos")));
 
 // =====================================================
 // 💾 Conexión a PostgreSQL
@@ -35,6 +35,7 @@ if (!dbUrl) {
   process.exit(1);
 }
 
+// 🔐 Configuración SSL (solo en Render)
 const sslConfig =
   dbUrl.includes("localhost") || dbUrl.includes("127.0.0.1")
     ? false
@@ -86,27 +87,31 @@ const pool = new Pool({
 })();
 
 // =====================================================
-// 🌐 Servir frontend (dashboard desde C:\srmweb)
+// 🌐 Servir frontend (Render usa el mismo repo)
 // =====================================================
-const dashboardPath = "C:\\srmweb";
+const publicPath = path.join(__dirname);
 
-if (existsSync(dashboardPath)) {
-  app.use(express.static(dashboardPath));
-  console.log(`🧭 Frontend servido desde: ${dashboardPath}`);
-
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(dashboardPath, "dashboard.html"));
-  });
+if (existsSync(publicPath)) {
+  app.use(express.static(publicPath));
+  console.log(`🧭 Frontend servido desde: ${publicPath}`);
 } else {
-  console.warn("⚠️  No se encontró la carpeta del dashboard (C:\\srmweb)");
+  console.warn("⚠️  No se encontró la carpeta de archivos estáticos.");
 }
+
+// Página principal
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicPath, "dashboard.html"));
+});
 
 // =====================================================
 // 🧠 Endpoints API
 // =====================================================
 
-// Estado básico
-app.get("/ping", (req, res) => res.send("OK"));
+// Estado básico (para Render keep-alive)
+app.get("/ping", (req, res) => {
+  console.log(`🔄 Ping recibido a las ${new Date().toLocaleTimeString()}`);
+  res.status(200).send("pong");
+});
 
 // Listar empresas
 app.get("/api/empresas", async (req, res) => {
@@ -138,22 +143,11 @@ app.post("/api/empresas", async (req, res) => {
       return res.status(400).json({ success: false, message: "Datos incompletos" });
     }
 
-    const query = `
-      INSERT INTO empresas (session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
-    `;
-
-    await pool.query(query, [
-      session_id,
-      nombre,
-      correo,
-      whatsapp,
-      tipo_empresa,
-      herramientas,
-      meta_6m,
-      area_critica,
-      empleados,
-    ]);
+    await pool.query(
+      `INSERT INTO empresas (session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      [session_id, nombre, correo, whatsapp, tipo_empresa, herramientas, meta_6m, area_critica, empleados]
+    );
 
     console.log(`✅ Empresa registrada: ${nombre} (${tipo_empresa || "sin tipo"})`);
     res.status(201).json({ success: true, message: "Empresa guardada correctamente" });
@@ -167,10 +161,8 @@ app.post("/api/empresas", async (req, res) => {
 app.delete("/api/limpiar", async (req, res) => {
   try {
     const { key } = req.body;
-
-    if (key !== ADMIN_KEY) {
+    if (key !== ADMIN_KEY)
       return res.status(403).json({ success: false, error: "Clave incorrecta" });
-    }
 
     await pool.query("TRUNCATE TABLE empresas RESTART IDENTITY");
     console.log("🗑️  Base de datos 'empresas' vaciada por administrador.");
@@ -186,8 +178,8 @@ app.delete("/api/limpiar", async (req, res) => {
 // =====================================================
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Backend SRM-QK v2.3 corriendo en puerto ${PORT}`);
-  console.log(`🌐 API disponible en: http://localhost:${PORT}/api/empresas`);
-  console.log(`🧭 Frontend: http://localhost:${PORT}/dashboard.html`);
+  console.log(`🌐 API disponible en: ${RENDER_URL}/api/empresas`);
+  console.log(`🧭 Dashboard: ${RENDER_URL}/dashboard.html`);
   console.log(`🔒 Clave admin: ${ADMIN_KEY}`);
   console.log("⚙️ Configuración SSL:", sslConfig === false ? "Desactivada" : "Activada");
 });

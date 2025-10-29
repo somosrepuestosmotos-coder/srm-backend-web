@@ -1,5 +1,26 @@
+# 🚫 Dependencias locales
 node_modules/
+
+# 🔒 Variables de entorno y claves
 .env
+
+# 💾 Bases de datos locales
 bd.sql
 bd.db
-db.dbfrontend/
+db.db
+
+# 🧱 Carpeta de desarrollo local del frontend (no necesaria en backend)
+frontend/
+
+# 🧹 Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# ⚙️ Logs y archivos de depuración
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🧪 Archivos generados por compilación o build
+dist/
+build/

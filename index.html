@@ -1,273 +1,683 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suite Ejecutiva Digital - Somos Repuestos Motos</title>
-  <meta name="description" content="Explora la propuesta estratégica de la Suite Ejecutiva Digital: innovación, marca y crecimiento para el futuro de Somos Repuestos Motos.">
-
-    <link rel="icon" href="/QK/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="/QK/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/QK/favicon-16x16.png">
-  <link rel="apple-touch-icon" href="/QK/apple-touch-icon.png">
-  <link rel="manifest" href="/QK/site.webmanifest">
-  <meta name="theme-color" content="#0A2F7B" />
-
-    <meta property="og:title" content="Suite Ejecutiva Digital - Somos Repuestos Motos">
-  <meta property="og:description" content="Estrategia, tecnología y visión: el futuro digital de Somos Repuestos Motos.">
-  <meta property="og:image" content="https://somosrepuestosmotos-coder.github.io/QK/android-chrome-512x512.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:url" content="https://somosrepuestosmotos-coder.github.io/QK/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
-
-    <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Suite Ejecutiva Digital - Somos Repuestos Motos">
-  <meta name="twitter:description" content="Explora la estrategia visual y digital que impulsa el crecimiento.">
-  <meta name="twitter:image" content="https://somosrepuestosmotos-coder.github.io/QK/android-chrome-512x512.png">
-
-  <style>
-    :root {
-      --primary-color: #0A2F7B;
-      --secondary-color: #00B6C8;
-      --text-color: #FFFFFF;
-    }
-    body, html {
-      margin: 0; padding: 0; width: 100%; height: 100%;
-      overflow: hidden; background-color: #000;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text-color);
-    }
-    .scene {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      display: flex; flex-direction: column; justify-content: center;
-      align-items: center; text-align: center;
-      opacity: 0; transition: opacity 1.8s ease-in-out;
-    }
-    .scene.active { opacity: 1; z-index: 2; }
-    .scene-video {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%; height: 100%; object-fit: cover;
-      background-color: #000; z-index: -2;
-    }
-    .scene-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.35));
-      z-index: -1;
-    }
-    .scene-content {
-      position: relative; z-index: 1; opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 1.4s ease-out, transform 1.4s ease-out;
-      padding: 2rem; box-sizing: border-box;
-    }
-    .scene.active .scene-content.visible { opacity: 1; transform: translateY(0); }
-    .scene h1 {
-      font-size: 3.8vw; margin-bottom: 1.5vw; font-weight: 700;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 0.03em;
-    }
-    .scene p {
-      font-size: 1.9vw; max-width: 55%; line-height: 1.6; font-weight: 300;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
-      text-align: justify; text-justify: inter-word; margin: 0 auto;
-    }
-    #form-container {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.8); z-index: 100;
-      display: none; justify-content: center; align-items: center;
-      backdrop-filter: blur(10px);
-    }
-    .form-content { width: 90%; max-width: 800px; }
-    .question-card {
-      background-color: #2c2c2c; padding: 40px; border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none;
-    }
-    .question-card.active { display: block; animation: fadeIn 0.5s forwards; }
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-    #progress-bar-container {
-      width: 100%; background-color: #444; border-radius: 5px;
-      overflow: hidden; margin-bottom: 30px;
-    }
-    #progress-bar {
-      width: 0%; height: 10px; background-color: var(--secondary-color);
-      transition: width 0.4s ease-out;
-    }
-    .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .answer-btn {
-      background-color: #3e3e3e; color: var(--text-color);
-      border: 1px solid #555; padding: 15px 20px; border-radius: 8px;
-      cursor: pointer; font-size: 1rem;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-    .answer-btn:hover { background-color: var(--secondary-color); transform: translateY(-3px); }
-    @media (max-width: 768px) {
-      .scene h1 { font-size: 6vw; }
-      .scene p { font-size: 3.5vw; max-width: 90%; }
-      .answers { grid-template-columns: 1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somos Repuestos Motos | Confianza que Acelera tu Camino</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    
+    <meta property="og:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
+    <meta property="og:description" content="Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas. Tienda de repuestos para motos | Moto cargueros | Mayorista">
+    <meta property="og:image" content="https://somosrepuestosmotos-coder.github.io/web/android-chrome-512x512.png">
+    <meta property="og:url" content="https://somosrepuestosmotos-coder.github.io/web/">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Somos Repuestos Motos | Confianza que Acelera tu Camino">
+    <meta name="twitter:description" content="Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas. Tienda de repuestos para motos | Moto cargueros | Mayorista">
+    <meta name="twitter:image" content="https://somosrepuestosmotos-coder.github.io/web/android-chrome-512x512.png">
+    <!-- Chosen Palette: Warm Neutrals with Strategic Accents (Negro Técnico, Rojo Energía, Azul Confianza) -->
+    <!-- Application Structure Plan: A single-page application centered around a primary "Avatar Selector" (Taller, Flota, Particular). This core interactive element dynamically changes the displayed content, creating a personalized user journey for each key customer segment without page reloads. This task-oriented architecture directly implements the report's strategy of guiding users to the most relevant information, featuring tailored solutions, interactive tools like a simple ROI calculator for workshops, and specific calls-to-action. Shared sections for social proof and value proposition reinforce the brand message for all users. This design was chosen for its efficiency in qualifying users and presenting a custom value proposition immediately, enhancing engagement and conversion potential. -->
+    <!-- Visualization & Content Choices: 
+        - User Segmentation -> Goal: Navigate/Organize -> Method: Interactive Tab-like Button Group -> Interaction: Clicking a button updates the main content area via JS (hiding/showing divs). Justification: Core mechanism for a seamless, personalized SPA experience. Library: Vanilla JS.
+        - Value Proposition -> Goal: Inform/Organize -> Method: Icon-based Grid Layout using HTML/Tailwind -> Interaction: Subtle hover effects. Justification: Visually breaks down key differentiators into digestible chunks.
+        - "Calculadora de Pérdidas" -> Goal: Engage/Inform -> Method: Interactive Form -> Interaction: User inputs data, JS calculates and displays estimated monthly loss in real-time. Justification: Powerful tool that quantifies the user's problem and demonstrates immediate value. Library: Vanilla JS.
+        - Key Stats (+30 años experiencia) -> Goal: Build Trust -> Method: Dynamic Counter -> Interaction: Numbers animate on scroll into view. Justification: Creates a dynamic and engaging way to present impressive figures. Library: Vanilla JS.
+        - Common Failure Points -> Goal: Show Expertise -> Method: Bar Chart -> Interaction: Animated bars and tooltips on hover. Justification: Visually represents the data-driven expertise from analyzing thousands of repairs. Library: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&family=Roboto:wght@400;70-0&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3, .font-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('freepik__the-style-is-3d-model-with-octane-render-volumetri__61153.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .avatar-btn {
+            transition: all 0.3s ease;
+        }
+        .avatar-btn.active {
+            background-color: #E63946;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+         .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-<main id="presentation-container">
-  <div class="scene active" id="scene-1">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-            <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-logo-qk-original.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Comenzamos por entender el corazón de su negocio.</h1><p>Analizamos su situación actual, su catálogo y su posición en el mercado. Vimos la base de un líder.</p></div>
-  </div>
+    <header class="bg-[#1A1A1A] text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="android-chrome-192x192.png" alt="Logo de Somos Repuestos Motos" class="h-10 mr-3">
+                <span class="text-xl font-title self-center whitespace-nowrap">Somos Repuestos Motos</span>
+            </a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#soluciones" class="hover:text-[#E63946] transition-colors">Soluciones</a>
+                <a href="#nosotros" class="hover:text-[#E63946] transition-colors">Nosotros</a>
+                <a href="#contacto" class="bg-[#E63946] px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Contacto Inmediato</a>
+            </nav>
+            <button class="md:hidden text-2xl">☰</button>
+        </div>
+    </header>
 
-  <div class="scene" id="scene-2">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-      <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-insight-mercado.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Pero descubrimos una oportunidad que sus competidores no ven.</h1><p>Su verdadero potencial no está solo en la calidad de sus piezas, sino en la construcción de una marca que inspire confianza inmediata a nivel digital.</p></div>
-  </div>
+    <main>
+        <section id="hero" class="hero-bg text-white">
+            <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+                <h2 class="text-4xl md:text-6xl font-title leading-tight mb-4">Confianza que Acelera tu Camino</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Más de 30 años de experiencia garantizando el movimiento de talleres, flotas y motociclistas. Descubre la solución experta que necesitas. Tienda de repuestos para motos | Moto cargueros | Mayorista</p>
+            </div>
+        </section>
 
-  <div class="scene" id="scene-3">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-      <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-nuevo-logo-3d.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Visualizamos su marca, no como es, sino como debería ser.</h1><p>Una identidad visual que comunica potencia, confianza y liderazgo tecnológico en cada punto de contacto.</p></div>
-  </div>
+        <section id="soluciones" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A]">Un Aliado para Cada Necesidad</h3>
+                    <p class="mt-4 text-lg text-gray-600">Selecciona tu perfil para ver las soluciones personalizadas que tenemos para ti.</p>
+                </div>
+                
+                <div id="avatar-selector" class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-12">
+                    <button data-view="taller" class="avatar-btn active w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🔧 Soy un Taller
+                    </button>
+                    <button data-view="flota" class="avatar-btn w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🚚 Gestiono una Flota
+                    </button>
+                    <button data-view="particular" class="avatar-btn w-full md:w-auto text-lg bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] font-semibold py-4 px-8 rounded-lg shadow-md">
+                        🏍️ Busco Repuestos
+                    </button>
+                </div>
 
-  <div class="scene" id="scene-4">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-      <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-papeleria-merchandising-packaging.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Una marca que cobra vida en el mundo real.</h1><p>Desde la primera tarjeta de presentación hasta el empaque de cada producto, su nueva identidad proyecta calidad y confianza.</p></div>
-  </div>
+                <div id="dynamic-content-container" class="max-w-5xl mx-auto">
+                    <div id="taller-content" class="content-section active">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Soluciones para Talleres</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Aumenta tu rentabilidad. No pierdas más clientes por falta de stock.</p>
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <p class="mb-4">Nuestro sistema **"Taller Siempre Listo"** es más que una simple entrega de repuestos. Es una alianza estratégica diseñada para eliminar tu principal dolor de cabeza: decirle "no tengo" a un cliente. Te proveemos con kits de alta rotación, logística prioritaria y el respaldo de 30 años de experiencia para que tu taller nunca se detenga.</p>
+                                    <ul class="space-y-2 mb-6">
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Kits de inventario predictivo.</li>
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Entrega prioritaria en horas.</li>
+                                        <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Asesoría técnica directa.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-lg">
+                                    <h5 class="text-xl font-semibold text-center mb-4">Calculadora de Pérdidas</h5>
+                                    <p class="text-sm text-center text-gray-600 mb-4">Descubre cuánto dinero podrías estar perdiendo al mes.</p>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="lost-clients" class="block text-sm font-medium text-gray-700">Clientes rechazados por semana</label>
+                                            <input type="number" id="lost-clients" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0077B6] focus:ring focus:ring-[#0077B6] focus:ring-opacity-50" placeholder="Ej: 5">
+                                        </div>
+                                        <div>
+                                            <label for="avg-repair" class="block text-sm font-medium text-gray-700">Costo promedio de reparación (COP)</label>
+                                            <input type="number" id="avg-repair" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0077B6] focus:ring focus:ring-[#0077B6] focus:ring-opacity-50" placeholder="Ej: 150000">
+                                        </div>
+                                    </div>
+                                    <div class="mt-6 text-center bg-red-100 p-4 rounded-lg">
+                                        <p class="text-gray-700">Pérdida mensual estimada:</p>
+                                        <p id="loss-result" class="text-2xl font-bold text-[#E63946]">$0 COP</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="text-center mt-8">
+                                <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Agenda tu Sesión Estratégica</a>
+                            </div>
+                        </div>
+                    </div>
 
-  <div class="scene" id="scene-5">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-      <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-ecosistema-digital.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Más que una nueva imagen, un sistema diseñado para crecer.</h1><p>Hemos estructurado una estrategia completa que transforma su experiencia en un motor de ventas predecible y automatizado.</p></div>
-  </div>
+                    <div id="flota-content" class="content-section">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Programa para Flotas</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Maximiza el tiempo operativo y reduce costos de mantenimiento.</p>
+                            <div class="text-left">
+                                <p class="mb-4">Una moto detenida es una pérdida directa de ingresos. Nuestro **"Programa Flota Operativa 24/7"** está diseñado para gerentes de logística que necesitan máxima eficiencia. Analizamos tu flota, creamos un plan de mantenimiento preventivo y te damos acceso a una bodega virtual con stock reservado para tus emergencias. Nos convertimos en tu socio logístico para que tu negocio nunca pare.</p>
+                                <ul class="grid md:grid-cols-2 gap-x-8 gap-y-2 mb-6">
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Análisis y diagnóstico de flota.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Bodega virtual con stock reservado.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Descuentos por volumen y crédito.</li>
+                                    <li class="flex items-center"><span class="text-[#0077B6] mr-2">✓</span> Logística de entrega en sitio.</li>
+                                </ul>
+                                <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+                                     <h5 class="text-xl font-semibold text-center mb-4">Visión Data-Driven: Puntos Críticos de Falla</h5>
+                                     <p class="text-center text-gray-600 mb-4">Basado en el análisis de más de 500,000 reparaciones, identificamos los componentes que más fallan en flotas de alto uso. Nuestro programa se enfoca en reforzarlos preventivamente.</p>
+                                     <div class="chart-container">
+                                        <canvas id="fleetChart"></canvas>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <a href="#contacto" class="bg-[#E63946] text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition-transform transform hover:scale-105 shadow-lg">Solicita un Análisis de Flota Gratuito</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="particular-content" class="content-section">
+                        <div class="bg-gray-100 p-8 rounded-xl shadow-inner">
+                            <h4 class="text-3xl font-title text-[#1A1A1A] text-center mb-2">Repuestos para tu Moto</h4>
+                            <p class="text-xl text-center text-[#E63946] font-semibold mb-6">Conduce con tranquilidad. Repuestos de calidad 100% garantizada.</p>
+                            <p class="text-center max-w-3xl mx-auto mb-8">Sabemos que tu moto es más que un vehículo. Es tu libertad, tu trabajo, tu pasión. Por eso, no dejamos nada al azar. Cada repuesto en nuestro catálogo ha pasado por un riguroso control de calidad basado en nuestra experiencia. Compra con la seguridad de que estás instalando lo mejor. Tu tranquilidad es nuestra garantía.</p>
+                            <div class="grid md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">🔍</div>
+                                    <h5 class="font-semibold text-lg">Filtros Fáciles</h5>
+                                    <p class="text-gray-600 text-sm">Encuentra tu repuesto por marca, modelo y año sin complicaciones.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">🛡️</div>
+                                    <h5 class="font-semibold text-lg">Calidad Verificada</h5>
+                                    <p class="text-gray-600 text-sm">Cada producto incluye guías y verificación de autenticidad.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="text-4xl mb-2">💬</div>
+                                    <h5 class="font-semibold text-lg">Asesoría Directa</h5>
+                                    <p class="text-gray-600 text-sm">¿Dudas? Un experto te responde por WhatsApp al instante.</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <!-- ÚNICO CAMBIO: enlace funcional a la tienda -->
+                                <a href="https://somosrepuestosmotos-coder.github.io/qkweb/"
+                                   target="_blank"
+                                   onclick="window.open(this.href, '_blank'); return false;"
+                                   class="bg-[#0077B6] text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-transform transform hover:scale-105 shadow-lg">
+                                   Ir a la Tienda Online
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proposicion-valor" class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A]">Más que Repuestos, Soluciones</h3>
+                    <p class="mt-4 text-lg text-gray-600">Nuestra diferencia se basa en cuatro pilares sólidos.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🎓</div>
+                        <h4 class="text-xl font-semibold mb-2">Expertise Técnico</h4>
+                        <p class="text-gray-600">30 años en el sector nos dan un conocimiento que ninguna tienda online puede igualar. Te asesoramos correctamente.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🎯</div>
+                        <h4 class="text-xl font-semibold mb-2">Nicho en Motocargueros</h4>
+                        <p class="text-gray-600">Somos los líderes en un mercado desatendido, ofreciendo soluciones específicas para vehículos de trabajo.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🚀</div>
+                        <h4 class="text-xl font-semibold mb-2">Entrega Inmediata</h4>
+                        <p class="text-gray-600">Nuestra logística integrada con Shopify + Dropi garantiza que tengas tu repuesto cuando lo necesitas. Sin demoras.</p>
+                    </div>
+                     <div class="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-5xl text-[#E63946] mb-4">🤝</div>
+                        <h4 class="text-xl font-semibold mb-2">Garantía Total</h4>
+                        <p class="text-gray-600">No vendemos nada en lo que no confiemos. Cada producto está respaldado por nuestra promesa de calidad y tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="scene" id="scene-6">
-    <div class="scene-overlay"></div>
-    <video class="scene-video" autoplay muted playsinline preload="auto">
-      <source src="https://srm-backend-qk-lwid.onrender.com/videos/animacion-srm-qk-k.mp4" type="video/mp4">
-    </video>
-    <div class="scene-content"><h1>Hemos construido el 90% del camino. El 10% final lo diseñamos juntos.</h1><p>Esta visión estratégica necesita ser ajustada a sus objetivos específicos. Su conocimiento es la pieza clave para personalizar el Plan Piloto.</p></div>
-  </div>
-</main>
+        <section id="nosotros" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-title text-[#1A1A1A] mb-4">Nuestro Legado: Tres Décadas de Confianza</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">Somos Repuestos Motos nació hace más de 30 años no como una tienda, sino como la pasión de un experto por la mecánica y el servicio. Empezamos en un pequeño local, conociendo a cada cliente por su nombre y el sonido de su motor. Hoy, esa misma dedicación la hemos llevado al mundo digital.</p>
+                        <p class="text-gray-600 leading-relaxed">No somos una corporación sin rostro. Somos la evolución de ese ejecutivo de ventas que recorría el país, construyendo relaciones basadas en la honestidad. Cada clic en nuestra web, cada consulta en WhatsApp, lleva consigo el peso y el orgullo de esa historia. Somos tu aliado experto, antes, ahora y siempre.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="30">0</span>
+                            <span class="text-gray-600">Años de Experiencia</span>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="500000">0</span>
+                            <span class="text-gray-600">Reparaciones Analizadas</span>
+                        </div>
+                         <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="100">0</span>
+                            <span class="text-gray-600">% Garantía</span>
+                        </div>
+                         <div class="bg-gray-100 p-6 rounded-lg">
+                            <span class="text-4xl font-title text-[#E63946] block stat-counter" data-target="24">0</span>
+                            <span class="text-gray-600">Horas para Entrega</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contacto" class="py-16 md:py-20 bg-[#1A1A1A] text-white">
+             <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl md:4xl font-title mb-4">¿Listo para Acelerar?</h3>
+                <p class="text-lg max-w-2xl mx-auto mb-8">Nuestro equipo de expertos está listo para darte una solución inmediata. Contáctanos y recibe la asesoría que necesitas ahora mismo.</p>
+                <a href="https://wa.me/573001727754?text=Hola%2C%20necesito%20asesor%C3%ADa%20con%20repuestos." target="_blank" class="inline-block bg-[#25D366] text-white font-bold py-4 px-8 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 shadow-lg text-xl">
+                    <span class="inline-block mr-2">✆</span> Hablar por WhatsApp
+                </a>
+             </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-gray-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Somos Repuestos Motos. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Una empresa del ecosistema ADSI.</p>
+        </div>
+    </footer>
 
-<div id="form-container">
-  <div class="form-content">
-    <div id="progress-bar-container"><div id="progress-bar"></div></div>
-    <div id="questions-wrapper"></div>
-  </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatarSelector = document.getElementById('avatar-selector');
+            const contentSections = document.querySelectorAll('.content-section');
+            const buttons = avatarSelector.querySelectorAll('.avatar-btn');
+
+            function showView(viewName) {
+                contentSections.forEach(section => {
+                    if (section.id === `${viewName}-content`) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                buttons.forEach(button => {
+                    if (button.dataset.view === viewName) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+            }
+
+            avatarSelector.addEventListener('click', function(e) {
+                if (e.target && e.target.closest('.avatar-btn')) {
+                    const button = e.target.closest('.avatar-btn');
+                    const view = button.dataset.view;
+                    showView(view);
+                }
+            });
+
+            // Calculator logic
+            const lostClientsInput = document.getElementById('lost-clients');
+            const avgRepairInput = document.getElementById('avg-repair');
+            const lossResult = document.getElementById('loss-result');
+
+            function calculateLoss() {
+                const clients = parseFloat(lostClientsInput.value) || 0;
+                const repairCost = parseFloat(avgRepairInput.value) || 0;
+                const monthlyLoss = clients * repairCost * 4.33;
+                
+                lossResult.textContent = `$${Math.round(monthlyLoss).toLocaleString('es-CO')} COP`;
+            }
+
+            lostClientsInput.addEventListener('input', calculateLoss);
+            avgRepairInput.addEventListener('input', calculateLoss);
+
+            // Stats counter animation
+            const counters = document.querySelectorAll('.stat-counter');
+            const speed = 200;
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const updateCount = () => {
+                            const target = +counter.getAttribute('data-target');
+                            const count = +counter.innerText;
+                            const inc = target / speed;
+
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 10);
+                            } else {
+                                counter.innerText = target.toLocaleString('es-CO');
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+
+            // Chart.js for Fleet
+            const fleetCtx = document.getElementById('fleetChart');
+            if(fleetCtx) {
+                new Chart(fleetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Kit de Arrastre', 'Frenos', 'Baterías', 'Suspensión', 'Sistema Eléctrico'],
+                        datasets: [{
+                            label: '% de Fallas en Flotas',
+                            data: [35, 25, 18, 12, 10],
+                            backgroundColor: 'rgba(0, 119, 182, 0.6)',
+                            borderColor: 'rgba(0, 119, 182, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            showView('taller');
+        });
+    </script>
+
+<!-- === 🔘 BOTÓN FLOTANTE: Diagnóstico SRM mejorado === -->
+<style>
+  /* 🔘 Botón flotante circular */
+  #btn-diagnostico-srm {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0A2F7B, #00B6C8);
+    color: #fff;
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    z-index: 9999;
+  }
+  #btn-diagnostico-srm:hover {
+    transform: scale(1.08) rotate(6deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* 💬 Tooltip */
+  #texto-diagnostico-srm {
+    position: fixed;
+    bottom: 38px;
+    right: 100px;
+    background: #0A2F7B;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9998;
+    white-space: nowrap;
+  }
+  #btn-diagnostico-srm:hover + #texto-diagnostico-srm {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 🪟 Fondo del modal */
+  #modal-diagnostico-srm {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease;
+  }
+
+  /* 📱 Contenedor lateral */
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 750px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+    transform: translateX(100%);
+    animation: slideOut 0.4s forwards;
+  }
+
+  /* 🔵 Encabezado */
+  .modal-header {
+    background: linear-gradient(135deg, #0A2F7B, #0077B6);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ❌ Botón cerrar */
+  #cerrar-modal-srm {
+    background: #E63946;
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #cerrar-modal-srm:hover {
+    background: #c92a2a;
+    transform: scale(1.1);
+  }
+
+  /* iframe del cuestionario */
+  #iframe-srm {
+    width: 100%;
+    height: calc(100vh - 64px);
+    border: none;
+  }
+
+  /* 🎞 Animaciones */
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+
+  /* 📲 Móvil */
+  @media (max-width: 640px) {
+    #btn-diagnostico-srm {
+      width: 56px;
+      height: 56px;
+      bottom: 18px;
+      right: 18px;
+      font-size: 24px;
+    }
+    #texto-diagnostico-srm {
+      display: none;
+    }
+    .modal-content {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      max-width: none;
+      animation: slideIn 0.3s forwards;
+    }
+    .modal-header {
+      font-size: 16px;
+      padding: 12px 14px;
+    }
+    #cerrar-modal-srm {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+    }
+  }
+</style>
+
+<!-- Botón flotante -->
+<button id="btn-diagnostico-srm" title="Diagnóstico SRM">🧩</button>
+<div id="texto-diagnostico-srm">Diagnóstico SRM</div>
+
+<!-- Modal lateral -->
+<div id="modal-diagnostico-srm" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>🧩 Diagnóstico SRM</span>
+      <button id="cerrar-modal-srm" aria-label="Cerrar diagnóstico">×</button>
+    </div>
+    <!-- ✅ Inserta aquí tu cuestionario SRM -->
+    <iframe id="iframe-srm" src="cuestionario_srm.html" title="Cuestionario Diagnóstico SRM"></iframe>
+  </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const scenes = Array.from(document.querySelectorAll('.scene'));
-  let currentSceneIndex = 0;
-  const formContainer = document.getElementById('form-container');
-  const questionsWrapper = document.getElementById('questions-wrapper');
-  const progressBar = document.getElementById('progress-bar');
-  let currentQuestionIndex = 0;
-  let sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2,9)}`;
+  const modal = document.getElementById('modal-diagnostico-srm');
+  const content = document.querySelector('.modal-content');
 
-  const questions = [
-    { key: 'main_objective_6m', text: '¿Cuál es su objetivo principal para los próximos 6 meses?', answers: ['Aumentar ventas B2B', 'Expandir a nuevas regiones', 'Mejorar la rentabilidad', 'Fortalecer la marca'] },
-    { key: 'biggest_challenge', text: '¿Cuál considera su mayor desafío actualmente?', answers: ['Competencia de precios', 'Logística y entregas', 'Fidelización de clientes', 'Digitalización de procesos'] },
-    { key: 'investment_priority', text: '¿En qué área priorizaría la inversión?', answers: ['Marketing y Publicidad', 'Tecnología (E-commerce, CRM)', 'Inventario y Stock', 'Capacitación de equipo'] },
-    { key: 'start_timeline', text: '¿Cuál es su cronograma ideal para iniciar este plan piloto?', answers: ['Inmediatamente', 'En el próximo mes', 'En el próximo trimestre', 'Aún por definir'] }
-  ];
+  function abrirModal() {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    content.style.animation = 'slideIn 0.4s forwards';
+    document.body.style.overflow = 'hidden';
+  }
 
-  function showText(scene) {
-    const content = scene.querySelector('.scene-content');
-    setTimeout(() => content.classList.add('visible'), 1000);
-  }
-
-  function transitionToScene(nextIndex) {
-    if (nextIndex >= scenes.length) { showForm(); return; }
-    scenes[currentSceneIndex].classList.remove('active');
-    const next = scenes[nextIndex];
-    next.classList.add('active');
-    showText(next);
-    const video = next.querySelector('video');
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch(()=>{});
-      video.onended = () => transitionToScene(nextIndex + 1);
-    }
-    currentSceneIndex = nextIndex;
-  }
-
-  document.getElementById('presentation-container').addEventListener('click', () => {
-    if (currentSceneIndex === scenes.length - 1) showForm();
-    else transitionToScene(currentSceneIndex + 1);
-  });
-
-  function showForm() {
-    formContainer.style.display = 'flex';
-    renderQuestion();
-  }
-
-  function renderQuestion() {
-    questionsWrapper.innerHTML = '';
-    if (currentQuestionIndex >= questions.length) { showThankYou(); return; }
-    const q = questions[currentQuestionIndex];
-    const card = document.createElement('div');
-    card.className = 'question-card active';
-    card.innerHTML = `<h2>${q.text}</h2><div class="answers">${q.answers.map(a=>`<button class'answer-btn' data-key='${q.key}' data-value='${a}'>${a}</button>`).join('')}</div>`;
-    questionsWrapper.appendChild(card);
-    document.querySelectorAll('.answer-btn').forEach(btn => btn.addEventListener('click', handleAnswer));
-  }
-
-  async function handleAnswer(e) {
-    const key = e.target.dataset.key, value = e.target.dataset.value;
-    try {
-      const res = await fetch("https://srm-backend-qk-lwid.onrender.com/api/responder", {
-        method: "POST", headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ sessionId, key, value })
-      });
-      if (!res.ok) throw new Error("Servidor");
-      e.target.classList.add('selected');
-      setTimeout(() => { currentQuestionIndex++; updateProgress(); renderQuestion(); }, 400);
-    } catch (err) {
-      alert("No se pudo registrar la respuesta. Intenta nuevamente.");
-    }
-  }
-
-  function updateProgress() {
-    progressBar.style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
-  }
-
-  function showThankYou() {
-    questionsWrapper.innerHTML = `<div class="question-card active" style="text-align:center;">
-      <h1>Gracias. Hemos recibido su diagnóstico.</h1>
-      <p style="font-size:1.2rem;">Nuestro equipo ya está personalizando su Plan Piloto de Adquisición. Recibirá su hoja de ruta en 48 horas.</p>
-    </div>`;
-    progressBar.style.width = '100%';
-  }
-
-  // --- INICIO ---
-  showText(scenes[0]);
-  const firstVideo = scenes[0].querySelector('video');
-  firstVideo.play().catch(e => console.warn("Autoplay bloqueado. Esperando clic."));
-  firstVideo.onended = () => transitionToScene(1);
+  // Habilitar los botones del cuestionario
+  document.querySelectorAll('a[href="#contacto"]').forEach(a => {
+    if (
+      a.textContent.includes('Agenda tu Sesión Estratégica') ||
+      a.textContent.includes('Solicita un Análisis de Flota Gratuito')
+    ) {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal();
+      });
+    }
+  });
 });
 </script>
 
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register("/QK/service-worker-lite.js", { scope: "/QK/" })
-    .then(reg => console.log("✅ Service Worker Lite Registrado", reg.scope))
-    .catch(err => console.error("❌ Error al registrar Service Worker", err));
-}
+(() => {
+  const btn = document.getElementById("btn-diagnostico-srm");
+  const modal = document.getElementById("modal-diagnostico-srm");
+  const cerrar = document.getElementById("cerrar-modal-srm");
+  const content = document.querySelector(".modal-content");
+
+  btn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+    content.style.animation = "slideIn 0.4s forwards";
+    document.body.style.overflow = "hidden";
+  });
+
+  const cerrarModal = () => {
+    content.style.animation = "slideOut 0.4s forwards";
+    setTimeout(() => {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "auto";
+    }, 400);
+  };
+
+  cerrar.addEventListener("click", cerrarModal);
+  modal.addEventListener("click", e => {
+    if (e.target === modal) cerrarModal();
+  });
+
+  // ✅ Accesibilidad: ESC para cerrar
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.style.display === "flex") cerrarModal();
+  });
+})();
 </script>
+<!-- === /BOTÓN FLOTANTE === -->
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(() => console.log("✅ Service Worker SRM registrado correctamente"))
+      .catch(err => console.error("❌ Error al registrar SW:", err));
+  }
+</script>
+
+
+
 </body>
 </html>

@@ -1,45 +1,38 @@
-const CACHE_NAME = "suite-ejecutiva-v1";
-const OFFLINE_URL = "offline.html";
-
-// Archivos principales a cachear
-const ASSETS_TO_CACHE = [
-  "/",
-  "index.html",
-  "offline.html",
-  "favicon-16x16.png",
-  "favicon-32x32.png",
-  "apple-touch-icon.png",
-  "android-chrome-192x192.png",
-  "android-chrome-512x512.png",
-  "site.webmanifest",
-  "browserconfig.xml",
-  "videos/animacion-logo-qk-original.mp4",
-  "videos/animacion-insight-mercado.mp4",
-  "videos/animacion-nuevo-logo-3d.mp4",
-  "videos/animacion-papeleria-merchandising-packaging.mp4",
-  "videos/animacion-ecosistema-digital.mp4",
-  "videos/animacion-srm-qk-k.mp4"
+const CACHE_NAME = "srm-cache-v1";
+const APP_SHELL = [
+  "/", // raíz
+  "/index.html",
+  "/dashboard.html",
+  "/favicon.ico",
+  "/favicon-32x32.png",
+  "/favicon-16x16.png",
+  "/apple-touch-icon.png",
+  "/android-chrome-192x192.png",
+  "/android-chrome-512x512.png",
+  "/site.webmanifest"
 ];
 
-// 🧩 INSTALACIÓN — cachea los recursos esenciales
+// ✅ Instalar el Service Worker
 self.addEventListener("install", (event) => {
-  console.log("📦 Instalando Service Worker...");
+  console.log("🧩 Instalando Service Worker SRM...");
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("📦 Archivos cacheados:", APP_SHELL);
+      return cache.addAll(APP_SHELL);
+    })
   );
+  self.skipWaiting();
 });
 
-// ♻️ ACTIVACIÓN — limpia versiones antiguas
+// ✅ Activar (limpia versiones antiguas)
 self.addEventListener("activate", (event) => {
-  console.log("🔁 Activando nuevo Service Worker...");
+  console.log("⚙️ Activando Service Worker...");
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log("🗑️ Eliminando caché vieja:", key);
+            console.log("🗑️ Eliminando caché antigua:", key);
             return caches.delete(key);
           }
         })
@@ -49,20 +42,27 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// 🌐 FETCH — modo inteligente: red > caché > offline
+// ✅ Estrategia de red con caché (Network First)
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+
+  if (url.pathname.startsWith("/api/")) return;
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // Si hay conexión, actualiza el caché
         const clone = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         return response;
       })
-      .catch(() =>
-        caches.match(event.request).then((cached) => cached || caches.match(OFFLINE_URL))
-      )
+      .catch(() => caches.match(event.request).then(resp => resp || caches.match("/offline.html")))
   );
+});
+
+
+// ✅ Notificación opcional (para futuras actualizaciones)
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
