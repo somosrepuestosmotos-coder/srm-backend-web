@@ -1,0 +1,6 @@
+C:\srm>set DATABASE_URL=postgresql://srm_db_qw5t_user:3FiRrRKD9P01GynOWjmxVWz4lo6djX8Z@dpg-d3rsomali9vc73egl85g-a.oregon-postgres.render.com/srm_db_qw5t
+
+C:\srm>set ADMIN_KEY=SRM2025ADMIN
+
+C:\srm>npm run dev
+
